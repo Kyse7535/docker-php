@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  myphp:
+    container_name: c_php
+    image: myphp
+    restart: always
+    ports:
+      - 8000:80
+    volumes:
+      - ./home:/var/www/html
+
+
+  db:
+    container_name: c_mysql
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dolibarr-14
+
+
+
+  phpmyadmin:
+    container_name: c_phpmyadmin
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
